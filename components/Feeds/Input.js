@@ -8,26 +8,30 @@ import {
 } from '@heroicons/react/outline';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
+import { sendPost, addImageToPost, addEmoji } from '../../Helpers/input-util';
 
 function Input() {
   const [input, setInput] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [showEmojis, setShowEmojis] = useState(false);
+  const [loading, setLoading] = useState(false);
   const filePickerRef = useRef(null);
 
-  const addImageToPost = () => {};
-
-  const addEmoji = (e) => {
-    let sym = e.unified.split('-');
-    let codesArray = [];
-    sym.forEach((el) => codesArray.push('0x' + el));
-    let emoji = String.fromCodePoint(...codesArray);
-    setInput(input + emoji);
-  };
+  const sendPostRef = () =>
+    sendPost(
+      loading,
+      setLoading,
+      selectedFile,
+      setSelectedFile,
+      setInput,
+      setShowEmojis
+    );
 
   return (
     <div
-      className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll`}
+      className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll ${
+        loading && 'opacity-60'
+      }`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -63,54 +67,60 @@ function Input() {
             </div>
           )}
         </div>
-        <div className='flex items-center justify-between pt-2.5'>
-          <div className='flex items-center'>
-            {/* FILE PICKER */}
-            <div className='icon' onClick={() => filePickerRef.current.click()}>
-              <PhotographIcon className='h-[22px] text-[#1d9bf0]' />
-              <input
-                type='file'
-                hidden
-                onChange={addImageToPost}
-                ref={filePickerRef}
-              />
-            </div>
+        {!loading && (
+          <div className='flex items-center justify-between pt-2.5'>
+            <div className='flex items-center'>
+              {/* FILE PICKER */}
+              <div
+                className='icon'
+                onClick={() => filePickerRef.current.click()}
+              >
+                <PhotographIcon className='h-[22px] text-[#1d9bf0]' />
+                <input
+                  type='file'
+                  hidden
+                  onChange={(e) => addImageToPost(e, setSelectedFile)}
+                  ref={filePickerRef}
+                />
+              </div>
 
-            {/* CHART BAR ICON */}
-            <div className='icon rotate-90'>
-              <ChartBarIcon className='text-[#1d9bf0] h-[22px]' />
-            </div>
+              {/* CHART BAR ICON */}
+              <div className='icon rotate-90'>
+                <ChartBarIcon className='text-[#1d9bf0] h-[22px]' />
+              </div>
 
-            {/* EMOJI Icon */}
-            <div className='icon' onClick={() => setShowEmojis(!showEmojis)}>
-              <EmojiHappyIcon className='text-[#1d9bf0] h-[22px]' />
-            </div>
+              {/* EMOJI Icon */}
+              <div className='icon' onClick={() => setShowEmojis(!showEmojis)}>
+                <EmojiHappyIcon className='text-[#1d9bf0] h-[22px]' />
+              </div>
 
-            {/* CalenderIcon */}
-            <div className='icon'>
-              <CalendarIcon className='text-[#1d9bf0] h-[22px]' />
+              {/* CalenderIcon */}
+              <div className='icon'>
+                <CalendarIcon className='text-[#1d9bf0] h-[22px]' />
+              </div>
+              {showEmojis && (
+                <Picker
+                  onSelect={addEmoji}
+                  style={{
+                    position: 'absolute',
+                    marginTop: '465px',
+                    marginLeft: -40,
+                    maxWidth: '320px',
+                    borderRadius: '20px',
+                  }}
+                  theme='dark'
+                />
+              )}
             </div>
-            {showEmojis && (
-              <Picker
-                onSelect={addEmoji}
-                style={{
-                  position: 'absolute',
-                  marginTop: '465px',
-                  marginLeft: -40,
-                  maxWidth: '320px',
-                  borderRadius: '20px',
-                }}
-                theme='dark'
-              />
-            )}
+            <button
+              className='bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 disabled:cursor-default'
+              disabled={!input.trim() && !selectedFile}
+              onClick={sendPostRef}
+            >
+              Tweet
+            </button>
           </div>
-          <button
-            className='bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 disabled:cursor-default'
-            disabled={!input.trim() && !selectedFile}
-          >
-            Tweet
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );
