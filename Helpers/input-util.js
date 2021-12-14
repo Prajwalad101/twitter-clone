@@ -57,7 +57,7 @@ export const addImageToPost = (e, setSelectedFile) => {
   };
 };
 
-export const addEmoji = (e) => {
+export const addEmoji = (e, setInput, input) => {
   let sym = e.unified.split('-');
   let codesArray = [];
   sym.forEach((el) => codesArray.push('0x' + el));

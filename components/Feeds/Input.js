@@ -34,7 +34,7 @@ function Input() {
 
   return (
     <div
-      className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll ${
+      className={`border-b border-gray-700 p-3 flex space-x-3 overflow-auto ${
         loading && 'opacity-60'
       }`}
     >
@@ -105,7 +105,7 @@ function Input() {
               </div>
               {showEmojis && (
                 <Picker
-                  onSelect={addEmoji}
+                  onSelect={(e) => addEmoji(e, setInput, input)}
                   style={{
                     position: 'absolute',
                     marginTop: '465px',
