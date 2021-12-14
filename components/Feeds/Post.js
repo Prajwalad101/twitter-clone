@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { Snapshot, useRecoilState } from 'recoil';
-import { modalState, postIdState } from '../../atoms/ModalAtom';
+import { modalState, postIdState } from '../../atoms/atomModal';
 import { useRouter } from 'next/router';
 
 import { db } from '../../firebase';
@@ -41,6 +41,18 @@ function Post({ id, post, postPage }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState([]);
   const router = useRouter();
+
+  useEffect(
+    () =>
+      onSnapshot(
+        query(
+          collection(db, 'posts', id, 'comments'),
+          orderBy('timestamp', 'desc')
+        ),
+        (snapshot) => setComments(snapshot.docs)
+      ),
+    [id]
+  );
 
   useEffect(
     () =>
