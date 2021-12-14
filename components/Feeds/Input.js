@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -17,14 +18,18 @@ function Input() {
   const [loading, setLoading] = useState(false);
   const filePickerRef = useRef(null);
 
+  const { data: session } = useSession();
+
   const sendPostRef = () =>
     sendPost(
       loading,
       setLoading,
       selectedFile,
       setSelectedFile,
+      input,
       setInput,
-      setShowEmojis
+      setShowEmojis,
+      session
     );
 
   return (
@@ -35,7 +40,7 @@ function Input() {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src='https://i1.wp.com/www.followchain.org/wp-content/uploads/2021/09/best-discord-profile-pictures-9.png?w=256&ssl=1g'
+        src={session.user.image}
         alt=''
         className='h-11 w-11 rounded-full cursor-pointer'
       />
