@@ -48,7 +48,7 @@ function PostPage(props) {
         ),
         (snapshot) => setComments(snapshot.docs)
       ),
-    [db, id]
+    [id]
   );
 
   if (!session) return <Login providers={providers} />;
@@ -82,7 +82,7 @@ function PostPage(props) {
                 <Comment
                   key={comment.id}
                   id={comment.id}
-                  comment={comment.data}
+                  comment={comment.data()}
                 />
               ))}
             </div>
