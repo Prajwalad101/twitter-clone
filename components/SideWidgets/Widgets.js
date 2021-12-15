@@ -41,7 +41,7 @@ function Widget({ trendingResults, followResults }) {
               objectFit='cover'
               className='rounded-full'
             />
-            <div className='ml-4 leading-5 group'>
+            <div className='ml-4 leading-5 group mr-[14px]'>
               <h4 className='font-bold group-hover:underline'>
                 {result.username}
               </h4>
