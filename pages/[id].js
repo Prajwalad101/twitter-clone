@@ -20,6 +20,7 @@ import { ArrowLeftIcon } from '@heroicons/react/solid';
 // import Comment from '../components/Comment';
 import Head from 'next/head';
 import Comment from '../components/Comment/Comment';
+import Widgets from '../components/SideWidgets/Widgets';
 
 function PostPage(props) {
   const { trendingResults, followResults, providers } = props;
@@ -88,7 +89,11 @@ function PostPage(props) {
             </div>
           )}
         </div>
-        ){isOpen && <Modal />}
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
+        {isOpen && <Modal />}
       </main>
     </div>
   );

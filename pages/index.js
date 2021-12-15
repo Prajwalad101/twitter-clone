@@ -7,6 +7,7 @@ import Feed from '../components/Feeds/Feed';
 import Login from '../components/Login/Login';
 import Modal from '../components/Modal/Modal';
 import Sidebar from '../components/Sidebar/Sidebar';
+import Widgets from '../components/SideWidgets/Widgets';
 
 export default function Home(props) {
   const { trendingResults, followResults, providers } = props;
@@ -26,6 +27,10 @@ export default function Home(props) {
       <main className='bg-black flex min-h-screen max-w-[1500px] mx-auto'>
         <Sidebar />
         <Feed />
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
 
         {isOpen && <Modal />}
       </main>
