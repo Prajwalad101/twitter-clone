@@ -1,3 +1,11 @@
+// NEXTJS/REACT
+import { getProviders, getSession, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+
+// FIREBASE
+import { db } from '../firebase';
 import {
   collection,
   doc,
@@ -5,22 +13,21 @@ import {
   orderBy,
   query,
 } from '@firebase/firestore';
-import { getProviders, getSession, useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { modalState } from '../atoms/atomModal';
-import Modal from '../components/Modal/Modal';
-import Sidebar from '../components/Sidebar/Sidebar';
-import Login from '../components/Login/Login';
-// import Widgets from '../components/Widgets';
-import Post from '../components/Feeds/Post';
-import { db } from '../firebase';
+
+// ICONS
 import { ArrowLeftIcon } from '@heroicons/react/solid';
-// import Comment from '../components/Comment';
-import Head from 'next/head';
-import Comment from '../components/Comment/Comment';
+
+// RECOIL
+import { modalState } from '../atoms/atomModal';
+import { useRecoilState } from 'recoil';
+
+// COMPONENTS
 import Widgets from '../components/SideWidgets/Widgets';
+import Sidebar from '../components/Sidebar/Sidebar';
+import Comment from '../components/Comment/Comment';
+import Modal from '../components/Modal/Modal';
+import Login from '../components/Login/Login';
+import Post from '../components/Feeds/Post';
 
 function PostPage(props) {
   const { trendingResults, followResults, providers } = props;

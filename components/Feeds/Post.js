@@ -1,10 +1,14 @@
+// FIREBASE
+import { db } from '../../firebase';
+
+//NEXTJS/REACT
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { Snapshot, useRecoilState } from 'recoil';
-import { modalState, postIdState } from '../../atoms/atomModal';
 import { useRouter } from 'next/router';
 
-import { db } from '../../firebase';
+// RECOIL
+import { useRecoilState } from 'recoil';
+import { modalState, postIdState } from '../../atoms/atomModal';
 
 import {
   collection,
@@ -35,8 +39,8 @@ import Moment from 'react-moment';
 function Post({ id, post, postPage }) {
   const { data: session } = useSession();
 
-  const [isOpen, setIsOpen] = useRecoilState(modalState);
-  const [postId, setPostId] = useRecoilState(postIdState);
+  const [setIsOpen] = useRecoilState(modalState);
+  const [setPostId] = useRecoilState(postIdState);
   const [comments, setComments] = useState([]);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState([]);

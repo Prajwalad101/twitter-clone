@@ -1,8 +1,12 @@
+// NEXTJS/REACT
 import { getProviders, getSession, useSession } from 'next-auth/react';
-
 import Head from 'next/head';
+
+// RECOIL
 import { useRecoilState } from 'recoil';
 import { modalState } from '../atoms/atomModal';
+
+// COMPONENTS
 import Feed from '../components/Feeds/Feed';
 import Login from '../components/Login/Login';
 import Modal from '../components/Modal/Modal';
@@ -13,8 +17,9 @@ export default function Home(props) {
   const { trendingResults, followResults, providers } = props;
 
   const { data: session } = useSession();
-  const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [isOpen] = useRecoilState(modalState);
 
+  // If there is no user return a Login component
   if (!session) return <Login providers={providers} />;
 
   return (

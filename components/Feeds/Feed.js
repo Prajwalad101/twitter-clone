@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+// FIREBASE
 import { db } from '../../firebase';
 import { onSnapshot, collection, query, orderBy } from '@firebase/firestore';
+
+// REACT
+import { useEffect, useState } from 'react';
+
+// HEROICONS
 import { SparklesIcon } from '@heroicons/react/outline';
 
+// COMPONENTS
 import Input from './Input';
 import Post from './Post';
 

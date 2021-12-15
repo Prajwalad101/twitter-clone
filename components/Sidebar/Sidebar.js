@@ -1,4 +1,7 @@
+// NEXTJS
 import Image from 'next/image';
+
+// HEROICONS
 import { HomeIcon } from '@heroicons/react/solid';
 import {
   HashtagIcon,
@@ -11,6 +14,7 @@ import {
   DotsHorizontalIcon,
 } from '@heroicons/react/outline';
 
+// COMPONENTS
 import SidebarLink from './SidebarLink';
 import UserProfile from './UserProfile';
 

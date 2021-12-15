@@ -1,5 +1,8 @@
+//NEXTJS/REACT
 import { useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
+
+// ICONS/EMOJI
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -9,6 +12,8 @@ import {
 } from '@heroicons/react/outline';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
+
+// COMPONENTS
 import { sendPost, addImageToPost, addEmoji } from '../../Helpers/input-util';
 
 function Input() {
