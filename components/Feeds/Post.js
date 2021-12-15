@@ -39,8 +39,8 @@ import Moment from 'react-moment';
 function Post({ id, post, postPage }) {
   const { data: session } = useSession();
 
-  const [setIsOpen] = useRecoilState(modalState);
-  const [setPostId] = useRecoilState(postIdState);
+  const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [postId, setPostId] = useRecoilState(postIdState);
   const [comments, setComments] = useState([]);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState([]);
